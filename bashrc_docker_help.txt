@@ -1,0 +1,2 @@
+cp bashrc_docker /root/.bashrc_docker
+echo "[ -f ~/.bashrc_docker ] && . ~/.bashrc_docker" >> /root/.bashrc; source ~/.bashrc 2>/dev/null >/dev/null
