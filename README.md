@@ -1,1 +1,1 @@
-# For docker image build and sync.
+# Docker 常用工具、命令及镜像构建.
