@@ -10,7 +10,6 @@ RUN bitnami-pkg unpack postgresql-9.6.11-0 --checksum f727a1dd30fcdfada9e3b53558
 RUN mkdir /docker-entrypoint-initdb.d /opt/bitnami/postgresql/conf/
 RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 
-COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
     BITNAMI_IMAGE_VERSION="9.6.11-debian-9-r12" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
