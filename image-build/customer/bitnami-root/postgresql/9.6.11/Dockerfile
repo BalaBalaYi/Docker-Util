@@ -27,5 +27,6 @@ ENV BITNAMI_APP_NAME="postgresql" \
 EXPOSE 5432
 
 USER root
+RUN chmod +x /app-entrypoint.sh && chmod +x /run.sh
 ENTRYPOINT [ "/app-entrypoint.sh" ]
 CMD [ "/run.sh" ]
