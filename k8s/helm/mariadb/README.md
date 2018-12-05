@@ -6,4 +6,5 @@
 3. secret信息获取方式如下，例 rootUser.password:  
 ```
 kubectl get secret --namespace mariadb-crltz mariadb-crltz-mariadb -o jsonpath="{.data.mariadb-root-password}" | base64 --decode
+(mariadb-crltz 为 namespace名称，请自行替换)
 ```
