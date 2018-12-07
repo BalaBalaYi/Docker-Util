@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: percona-xtradb-cluster-pxc
+  name: percona-xtradb-cluster-pxc-nodeport
+spec:
+  ports:
+  - name: mysql
+    nodePort: 30030
+    port: 3306
+    protocol: TCP
+    targetPort: mysql
+  selector:
+    app: percona-xtradb-cluster-pxc
+    release: percona-xtradb-cluster
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

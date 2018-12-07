@@ -1,0 +1,17 @@
+image.repository: harbor.io/library/percona/percona-xtradb-cluster
+image.tag: 5.7.19
+image.pullPolicy: IfNotPresent
+replicas: 3
+allowRootFrom: "%"
+mysqlRootPassword: MysqlrootPWD@456
+xtraBackupPassword: MysqlbackupPWD#789
+mysqlUser: admin
+mysqlPassword: MysqladminPWD!123
+mysqlDatabase: admin
+persistence.enabled: false
+persistence.size: 8Gi
+persistence.storageClass: ""
+persistence.accessMode: ReadWriteOnce
+metricsExporter.enabled: false
+podDisruptionBudget.enabled: false
+podDisruptionBudget.maxUnavailable: 1
