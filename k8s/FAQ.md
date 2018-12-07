@@ -2,10 +2,16 @@
 issue:https://github.com/kubernetes/kubernetes/issues/60807
 
 #####  workaround:
-1. kubectl get namespace annoying-namespace-to-delete -o json > tmp.json  
-2. edit tmp.json and delete "kubernetes" in finalizers  
-3. nohup kubectl proxy &  
-4.   
+1. Write namespace(which u want to delete) resource into json:
+```
+kubectl get namespace annoying-namespace-to-delete -o json > tmp.json  
+```
+2. Edit tmp.json and delete "kubernetes" in finalizers.
+3. Using kubectl proxy (default port: 8001):
+```
+nohup kubectl proxy & 
+```
+4. Api request:
 1) for rancher:
 ```
 curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8001/k8s/clusters/xxxxxx/api/v1/namespaces/annoying-namespace-to-delete/finalize
@@ -16,9 +22,13 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http:
 curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json https://127.0.0.1:8001/api/v1/namespaces/annoying-namespace-to-delete/finalize
 ```
 
-5. kill -9 pid (ps au|grep proxy)
+5. Close kubectl proxy:
+```
+kill -9 pid 
+(Get pid by 'ps au|grep proxy')
+```
 
-
+<br/>
 ### 2. How to using etcdctl in k8s:
 
 First you need to login the etcd container using docker exec or docker-enter.
