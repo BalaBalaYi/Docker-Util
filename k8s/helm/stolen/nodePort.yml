@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: stolon
+  name: stolon-nodeport
+spec:
+  ports:
+  - name: stolon
+    nodePort: 30040
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app: stolon
+    component: stolon-proxy
+    release: stolon
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

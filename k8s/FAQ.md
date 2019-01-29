@@ -30,7 +30,17 @@ kill -9 pid
 
 <br/>
 
-### 2. How to using etcdctl in k8s:
+### 2. How to access the rancher etcd:
+
+1. Install etcdctl on host (mount to the rancher-server container) or in container.
+
+2. Using control api: 
+```
+ETCDCTL_API=3 etcdctl --write-out=table --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/ssl/kube-ca.pem --cert=/etc/kubernetes/ssl/kube-etcd-127-0-0-1.pem --key=/etc/kubernetes/ssl/kube-etcd-127-0-0-1-key.pem
+```
+
+
+### 3. How to access the k8s etcd:
 
 First you need to login the etcd container using docker exec or docker-enter.
 
@@ -61,3 +71,12 @@ Found cacert, cert and key files (example):
 ```
 ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key endpoint status
 ```
+
+
+### 4. Let configmap pretty display:
+Referenced issue: ``` https://github.com/kubernetes/kubernetes/issues/36222```
+#####  workaround:
+1. Using space instead of tab;
+2. Don't leave space at then end of the line;
+3. When using text tools like ```notepad++``` and ```ultraedit``` on windows need to pay attention on the copy-paste operations.
+

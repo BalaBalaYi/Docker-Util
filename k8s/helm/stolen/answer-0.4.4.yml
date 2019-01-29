@@ -1,0 +1,22 @@
+image.repository: harbor.io/library/sorintlab/stolon
+image.tag: v0.12.0-pg10
+image.pullPolicy: IfNotPresent
+etcdImage.repository: harbor.io/library/balabalayi/etcd-amd64
+etcdImage.tag: 2.3.7
+etcdImage.pullPolicy: IfNotPresent
+debug: false
+persistence.enabled: false
+persistence.storageClassName: ""
+persistence.accessModes: ["ReadWriteOnce"]
+persistence.size: 10Gi
+superuserUsername: "stolonsu"
+superuserPassword: "StolonsuPWD!123"
+replicationUsername: "stolonreplica"
+replicationPassword: "StolonreplicaPWD@456"
+store.backend: kubernetes
+store.kubeResourceKind: configmap
+ports: {"stolon":{"containerPort": 5432},"metrics":{"containerPort": 8080}}
+keeper.replicaCount: 3
+proxy.replicaCount: 3
+sentinel.replicaCount: 3
+#pgParameters: {}

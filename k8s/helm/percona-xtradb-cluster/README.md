@@ -1,5 +1,7 @@
 # 注意事项  
-1. 经测试，k8s v1.11 5.7.19兼容性最好，其它版本均需修改init容器来解决兼容性问题。
+### 1. mysql galera作为典型的cluster分布式应用，天然支持多主读写，无failover等问题，可直接通过控制集群规模达到很好的高可用性。
 
-2. 使用openebs作为持久化存储，测试失败，效果同：https://github.com/helm/charts/issues/4900 ，未解决。
-解释：mysql galera作为典型的cluster分布式应用，天然支持多主读写，无failover等问题，可直接通过控制集群规模达到很好的高可用性.关于具体为何无法使用openebs，探究中...
+### 2. 经测试，k8s v1.11 5.7.19兼容性最好，其它版本均需修改init容器来解决兼容性问题。
+
+### 3. 使用openebs作为持久化存储，初次测试失败，效果同：https://github.com/helm/charts/issues/4900 ，已解决。
+经测试观察，集群是最终可以稳定运行的。之所以会出现上述报错，是因为 liveness probe 和 readiness probe 的执行过快（默认30s），导致多次重试，修改其首次执行时间或超时时间即可。算不上bug，但是用户体验不是很好，当然也和集群节点的硬件性能有关。
