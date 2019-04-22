@@ -7,9 +7,9 @@
       repository: "harbor.io/library/confluentinc/cp-zookeeper"
       tag: "4.1.1"
     persistence: 
-      enabled: false
-      size: "10Gi"
-      storageClass: ""
+      enabled: true
+      size: "5Gi"
+      storageClass: "openebs-jiva-default"
   schema-registry: 
     image: "harbor.io/library/confluentinc/cp-schema-registry"
     imageTag: "4.0.1"
@@ -33,4 +33,4 @@
   persistence: 
     enabled: true
     size: "50Gi"
-    storageClass: "openebs-jiva-default"
+    storageClass: "openebs-jiva-single"
