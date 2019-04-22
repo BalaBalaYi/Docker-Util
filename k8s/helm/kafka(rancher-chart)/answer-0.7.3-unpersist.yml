@@ -7,9 +7,9 @@
       repository: "harbor.io/library/confluentinc/cp-zookeeper"
       tag: "4.1.1"
     persistence: 
-      enabled: true
+      enabled: false
       size: "5Gi"
-      storageClass: "openebs-jiva-default"
+      storageClass: "openebs-jiva-single"
   schema-registry: 
     image: "harbor.io/library/confluentinc/cp-schema-registry"
     imageTag: "4.0.1"
@@ -27,10 +27,19 @@
       hosts: 
         - "xip.io"
     service: 
-      type: "NodePort"
-      nodePort: "30061"
+      type: "ClusterIP"
   replicas: "3"
   persistence: 
-    enabled: true
+    enabled: false
     size: "50Gi"
     storageClass: "openebs-jiva-single"
+    mountPath: "/opt/kafka/data"
+  external:
+    enabled: true
+    servicePort: 19092
+    firstListenerPort: 30060
+    domain: cluster.local
+    init:
+      image: "harbor.io/library/lwolf/kubectl_deployer"
+      imageTag: "0.4"
+      imagePullPolicy: "IfNotPresent"
